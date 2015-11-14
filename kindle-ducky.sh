@@ -2,7 +2,7 @@
 # Adb install an apk, get OEM s/n, get macc address
 # define variables
 USAGE="Usage: $0 [[configure][-c]] | [[start][-s]] | [[run] [-r]] | [[kill] [-k]] "
-file=f2b
+file=app
 cwd=$(pwd)
 cwd=$workdir
 so=$(adb get-serialno)
