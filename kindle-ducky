@@ -42,7 +42,7 @@ DELAY 1750
 REM Enter Network SSID:
 STRING SSID HERE
 DOWN
-REM open encryp dropdown
+REM open network encryption dropdown menu
 ENTER
 DOWN
 DOWN
@@ -63,7 +63,7 @@ ENTER
 DELAY 1750
 STRING SSID HERE
 DOWN
-REM open encryp dropdown
+REM  open network encryption dropdown menu
 ENTER
 DOWN
 DOWN
@@ -81,7 +81,7 @@ ENTER
 DELAY 1750
 STRING SSID HERE
 DOWN
-REM open encrypt dropdown
+REM  open network encryption dropdown menu
 ENTER
 DOWN
 DOWN
@@ -136,5 +136,9 @@ ENTER
 REM Yes do it
 RIGHT
 ENTER
+REM Back to home screen
+ESCAPE
+ESCAPE
+ESCAPE
 REM Done
 REM Run shell script to finish config. See README
