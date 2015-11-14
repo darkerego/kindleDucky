@@ -1,0 +1,140 @@
+REM DUCKY KINDLE
+REM Configure Kindle Fire (Gen 5)
+REM Add wifi networks, enable usb debugging for further config
+DEFAULTDELAY 750
+DELAY 5000
+REM Continue
+TAB
+DOWN
+TAB
+ENTER
+REM Select Configure Later
+DELAY 1000
+ENTER
+DELAY 1500
+REM Complete setup later
+ENTER
+DELAY 1500
+TAB
+RIGHT
+ENTER
+DELAY 5000
+REM At Home Screen
+REM Select settings
+STRING settings
+DELAY 1000
+DOWN
+DOWN
+DOWN
+ENTER
+DELAY 4000
+REM select wireless
+ENTER
+REM Wifi
+TAB
+ENTER
+DELAY 1000
+REM add a network
+DOWN
+PAGEDOWN
+ENTER
+DELAY 1750
+REM Enter Network SSID:
+STRING SSID HERE
+DOWN
+REM open encryp dropdown
+ENTER
+DOWN
+DOWN
+REM Select wpa2
+ENTER
+DELAY 1500
+REM Enter Net Password
+DOWN
+REM Enter Network Password:
+STRING WPA-PSK HERE
+REM OK
+ENTER
+DELAY 2500
+REM
+REM Configure Another network
+REM Select join network
+ENTER
+DELAY 1750
+STRING SSID HERE
+DOWN
+REM open encryp dropdown
+ENTER
+DOWN
+DOWN
+REM select wpa2
+ENTER
+DOWN
+REM Enter Net Password
+STRING WPA-PSK HERE
+REM OK
+ENTER
+DELAY 2500
+REM
+REM last network
+ENTER
+DELAY 1750
+STRING SSID HERE
+DOWN
+REM open encrypt dropdown
+ENTER
+DOWN
+DOWN
+REM Select wpa2
+ENTER
+DOWN
+REM enter net pass
+STRING WPA-PSK HERE
+ENTER
+DELAY 2500
+REM
+REM End Configure Networks
+REM back to main setting menu
+ESCAPE
+ESCAPE
+REM Select device options
+DOWN
+DOWN
+DOWN
+DOWN
+DOWN
+DOWN
+ENTER
+REM Select Device SN
+DOWN
+DOWN
+DOWN
+DOWN
+DOWN
+DOWN
+DOWN
+DOWN
+REM press enter 8 times to enable developer options
+ENTER
+ENTER
+ENTER
+ENTER
+ENTER
+ENTER
+ENTER
+ENTER
+REM Enable usb debugging
+DOWN
+DOWN
+ENTER
+DOWN
+DOWN
+DOWN
+DOWN
+DOWN
+ENTER
+REM Yes do it
+RIGHT
+ENTER
+REM Done
+REM Run shell script to finish config. See README
