@@ -3,7 +3,7 @@
 # A USB Rubber Ducky script and shell script to automate mass Kindle Fire (gen5) installations.
 
 Automating mass Android devices is a pain in the neck, and likely is a nuisance for lot of organizations. There 
-is no straightfoward way to do it without root, other than flashing an update.zip from recovery, which isn't always possible. The rubber ducky solves that problem. Kindle Ducky...
+is no straightfoward way to do it without root, other than flashing an update.zip from recovery, which isn't always possible. Kindle ducky solves that problem (with Kindle Fire's anyway) by
 
 * utilizing a USB Rubber Ducky to deal with the installation proceedure 
 * add WiFi networks to the system, 
