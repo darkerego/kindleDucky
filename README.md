@@ -8,6 +8,12 @@ is no straightfoward way to do it without root, that I know of anyway. Kindle-Du
 * add WiFi networks to the system, 
 * Finally, enables USB Debugging so that the shell script can take over from there and install desired APK's. 
 
+# Dependencies
+* ADB (android-tools-adb)
+* Duckencoder (https://github.com/hak5darren/USB-Rubber-Ducky/wiki/Downloads)
+* Java Runtime
+* A USB Rubber Ducky!
+* A Linux box
 
 # USAGE
 
