@@ -1,14 +1,13 @@
 #!/bin/bash
-# Adb install an apk/get so/get macc address
+# Adb install an apk, get OEM s/n, get macc address
 # define variables
 USAGE="Usage: $0 < --start >: Start ADB, check for and create files. < --run > Conect ADB, Install APK, get S/N, get MAC.  "
 file=someapktoinstall.apk
 cwd=$(pwd)
 cwd=$workdir
 so=$(adb get-serialno)
-mac=
 out=devices.log
-org=Your Company, INC
+org=CompanyName, INC
 #
 
 
@@ -19,19 +18,15 @@ if [[ $1 == "--configure" ]]; then
     if which programname >/dev/null; then
     	echo We have ADB, okay...
     else
-    	echo 'Need to install adb.'
+    	echo 'This script needs ADB. Installing...'
     	sudo apt-get -y -qq install android-tools-adb
     fi
 
 elif [[ $1 == "--start" ]];then
 
 
-	if [[ ! -f macaddrs ]];then
-		touch $mac
-		echo
-	fi
-	if [[ ! -f serialsnos ]];then
-		touch $so
+	if [[ ! -f $out ]];then
+		touch $out
 		echo
 	fi
 
@@ -41,6 +36,7 @@ elif [[ $1 == "--start" ]];then
 # do it
 
 elif [[ $1 == "--run" ]];then
+# Ought to be looped, will fix soon...
 #while true;do
 
 	adb wait-for-device
