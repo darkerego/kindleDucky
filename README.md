@@ -11,10 +11,10 @@ is no straightfoward way to do it without root, other than flashing an update.zi
 
 # Dependencies
 * ADB (android-tools-adb)
-* Duckencoder (https://github.com/hak5darren/USB-Rubber-Ducky/wiki/Downloads)
-* Java Runtime
-* A USB Rubber Ducky!
-* A Linux box
+* <a href="https://github.com/hak5darren/USB-Rubber-Ducky/wiki/Downloads">Duckencoder</a>
+* Java Runtime (If you have <a href="https://code.google.com/p/simple-ducky-payload-generator"> simple-ducky</a> installed you already have the correct JRE)
+* A  <a href="http://usbrubberducky.com/#!index.md" USB Rubber Ducky</a>>
+* A Linux box of any flavor
 
 # USAGE
 
