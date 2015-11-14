@@ -7,7 +7,7 @@ cwd=$(pwd)
 cwd=$workdir
 so=$(adb get-serialno)
 out=devices.log
-org=CompanyName, INC
+org="CompanyName, INC"
 #
 
 
