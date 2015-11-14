@@ -1,8 +1,8 @@
 #!/bin/bash
 # Adb install an apk, get OEM s/n, get macc address
 # define variables
-USAGE="Usage: $0 < --start >: Start ADB, check for and create files. < --run > Conect ADB, Install APK, get S/N, get MAC.  "
-file=someapktoinstall.apk
+USAGE="Usage: $0 [[configure][-c]] | [[start][-s]] | [[run] [-r]] | [[kill] [-k]] "
+file=f2b
 cwd=$(pwd)
 cwd=$workdir
 so=$(adb get-serialno)
@@ -10,20 +10,31 @@ out=devices.log
 org="CompanyName, INC"
 #
 
+control_c() {
+    echo "Cleaning up..."
+    killall adb >> /dev/null
+    echo "Goodbye!"
+    exit
+}
+
+
 
 
 # prep env
 
-if [[ $1 == "--configure" ]]; then
+configure(){
     if which programname >/dev/null; then
     	echo We have ADB, okay...
     else
     	echo 'This script needs ADB. Installing...'
     	sudo apt-get -y -qq install android-tools-adb
     fi
+}
 
-elif [[ $1 == "--start" ]];then
 
+# Check for output, start adb
+
+start(){
 
 	if [[ ! -f $out ]];then
 		touch $out
@@ -31,31 +42,54 @@ elif [[ $1 == "--start" ]];then
 	fi
 
 	cd $workdir
-	adb start-server
-
+	adb start-server && echo started || echo fail
+}
 # do it
 
-elif [[ $1 == "--run" ]];then
+run(){
 # Ought to be looped, will fix soon...
-#while true;do
+while true;do
 
 	adb wait-for-device
 	read -p "Enter $org Device Number: " device
 	adb install $file.apk && echo SUCCESS
 	echo "#########-BGN-##########" | tee -a $out
-	echo  $org S/N: $device | tee -a $out
+	echo  "$org S/N: $device" | tee -a $out
 	echo OEM S/N:| tee -a $out 
 	echo $so | tee -a $out
 	echo MAC ADDRESS: | tee -a $out
 	echo  $(adb shell netcfg | grep wlan0 | grep -o -E '([[:xdigit:]]{1,2}:){5}[[:xdigit:]]{1,2}')  | tee -a $out
 	echo "#########-END-#########" | tee -a $out
 	cp $out $out.back
-#done
+	read -p "All done. Unplug device and enter OK to wait for next device..." allGood
+	if [[ $allGood == "OK" ]];then
+		sleep 1
+		echo
+		echo "Waiting for next device..."
+	fi
+done
+}
 
-else
+case "$1" in
 
-echo $USAGE
+--configure|-c)  echo "Checking for dependencies..."
+	configure
+    ;;
+--start|-s)  echo  "Starting ADB..."
+   	start
+    ;;
+--run|-r)  echo  "Waiting for device..."
+    trap control_c SIGINT
+    run
+    ;;
+--kill|-k) echo  "Sending SIGKILL signal"
+   killall adb
+   ;;
+*) echo $USAGE
+   killall adb
+   ;;
+esac
 
-fi
+
 
 exit
