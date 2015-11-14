@@ -8,7 +8,7 @@ cwd=$workdir
 so=$(adb get-serialno)
 mac=
 out=devices.log
-org=MOC
+org=Your Company, INC
 #
 
 
