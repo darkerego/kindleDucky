@@ -1,10 +1,11 @@
 #!/bin/bash
 # Adb install an apk, get OEM s/n, get macc address
 # define variables
-USAGE="Usage: $0 <option> [ [--configure][-c]] | [[--start][-s]] | [[--run] [-r]] | [[--kill] [-k]] ]"
+USAGE="Usage: $0 <option> [ [--configure][-c]] | [[--run] [-r]] | [[--kill] [-k]] ]"
 file=app.apk
-cwd=$(pwd)
-cwd=$workdir
+# Define a directory and maybe use a wildcard to install multiple apks
+#cwd=$(pwd)
+#cwd=$workdir
 so=$(adb get-serialno)
 out=devices.log
 org="CompanyName, INC"
@@ -23,6 +24,13 @@ control_c() {
 # prep env
 
 configure(){
+   
+    echo "Will now check for adb and create log... Remember to define apk(s) to install in script, if any."
+    if [[ ! -f $out ]];then
+		touch $out
+		echo $(date) >> $out
+    fi
+    
     if which adb >/dev/null; then
     	echo We have ADB, okay...
     else
@@ -32,26 +40,13 @@ configure(){
 }
 
 
-# Check for output, start adb
-
-start(){
-
-	if [[ ! -f $out ]];then
-		touch $out
-		echo
-	fi
-
-	cd $workdir
-	adb start-server && echo started || echo fail
-}
-# do it
-
 run(){
 # Get org s/n, install apk(s), get oem s/n, mac address of wlan0, wait for next device
 while true;do
 
 	adb wait-for-device
 	read -p "Enter $org Device Number: " device
+	# I only needed to install one apk, it can be tweaked to install more
 	adb install $file && echo SUCCESS
 	echo "#########-BGN-##########" | tee -a $out
 	echo  "$org S/N: $device" | tee -a $out
@@ -76,9 +71,6 @@ case "$1" in
 
 --configure|-c)  echo "Checking for dependencies..."
 	configure
-    ;;
---start|-s)  echo  "Starting ADB..."
-   	start
     ;;
 --run|-r)  echo  "Waiting for device..."
     	trap control_c SIGINT
