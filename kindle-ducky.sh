@@ -47,7 +47,7 @@ start(){
 # do it
 
 run(){
-# Ought to be looped, will fix soon...
+# Get org s/n, install apk(s), get oem s/n, mac address of wlan0, wait for next device
 while true;do
 
 	adb wait-for-device
@@ -70,6 +70,8 @@ while true;do
 done
 }
 
+# script arguments
+
 case "$1" in
 
 --configure|-c)  echo "Checking for dependencies..."
@@ -79,14 +81,14 @@ case "$1" in
    	start
     ;;
 --run|-r)  echo  "Waiting for device..."
-    trap control_c SIGINT
-    run
+    	trap control_c SIGINT
+    	run
     ;;
 --kill|-k) echo  "Sending SIGKILL signal"
-   killall adb
+   	killall adb
    ;;
 *) echo $USAGE
-   killall adb
+   	killall adb
    ;;
 esac
 
