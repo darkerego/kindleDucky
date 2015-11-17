@@ -2,7 +2,7 @@
 # Adb install an apk, get OEM s/n, get macc address
 # define variables
 USAGE="Usage: $0 [[configure][-c]] | [[start][-s]] | [[run] [-r]] | [[kill] [-k]] "
-file=app
+file=app.apk
 cwd=$(pwd)
 cwd=$workdir
 so=$(adb get-serialno)
@@ -52,13 +52,13 @@ while true;do
 
 	adb wait-for-device
 	read -p "Enter $org Device Number: " device
-	adb install $file.apk && echo SUCCESS
+	adb install $file && echo SUCCESS
 	echo "#########-BGN-##########" | tee -a $out
 	echo  "$org S/N: $device" | tee -a $out
-	echo OEM S/N:| tee -a $out 
+	echo "OEM S/N: "| tee -a $out 
 	echo $so | tee -a $out
-	echo MAC ADDRESS: | tee -a $out
-	echo  $(adb shell netcfg | grep wlan0 | grep -o -E '([[:xdigit:]]{1,2}:){5}[[:xdigit:]]{1,2}')  | tee -a $out
+	echo "MAC ADDRESS:" | tee -a $out
+	adb shell netcfg | grep wlan0 | grep -o -E '([[:xdigit:]]{1,2}:){5}[[:xdigit:]]{1,2}'  | tee -a $out
 	echo "#########-END-#########" | tee -a $out
 	cp $out $out.back
 	read -p "All done. Unplug device and enter OK to wait for next device..." allGood
