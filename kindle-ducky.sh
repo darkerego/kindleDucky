@@ -23,7 +23,7 @@ control_c() {
 # prep env
 
 configure(){
-    if which programname >/dev/null; then
+    if which adb >/dev/null; then
     	echo We have ADB, okay...
     else
     	echo 'This script needs ADB. Installing...'
